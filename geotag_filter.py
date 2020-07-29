@@ -28,5 +28,8 @@ if __name__ == "__main__":
     with open(args.input) as tweet_jsons:
         #Extract only the tweets that have a coordinate location associated to them
         for tweet_json in tweet_jsons:
-            if is_geotagged(tweet_json):
-                print(tweet_json, end="") #Newlines already conclude tweet strings themselves
+            try:
+                if is_geotagged(tweet_json):
+                    print(tweet_json, end="") #Newlines already conclude tweet strings themselves
+            except ValueError:
+                pass
