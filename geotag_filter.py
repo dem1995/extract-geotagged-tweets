@@ -4,17 +4,21 @@ Outputs the extracted Tweets in JSONL format
 """
 import json
 
-def is_geotagged(tweet_json: str) -> bool:
+def is_geotagged(tweet_json: str, bounding_box_is_fine: bool=True) -> bool:
     """
     Takes in a tweets JSON string and outputs whether the underlying tweet is geotagged.
     Arguments:
         tweet-json: str - the json string whose tweet is to be tested
     Returns:
-        True if the underlying tweet in the provided string is geotagged (has a coordinates field),
-                false otherwise.
+        True if the underlying tweet in the provided string is geotagged (has a bounding box
+                or coordinates field); false, otherwise.
     """
     tweet_dict = json.loads(tweet_json)
-    return tweet_dict['coordinates'] is not None
+    if bounding_box_is_fine:
+        is_geotagged_result = tweet_dict['bounding_box'] is not None or tweet_dict['coordinates'] is not None
+    else:
+        is_geotagged_result = return tweet_dict['coordinates'] is not None
+    return is_geotagged_result
 
 
 if __name__ == "__main__":
@@ -23,6 +27,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('input', metavar='I',
         help="The JSONL tweets file whence to extract geotagged tweets")
+    parser.add_argument('-s', '--strict', action='store_true',
+        help="Whether to only allow tweets that have a non-null coordinates field (by default tweets with a bounding_box field are also allowed through)"
     args = parser.parse_args()
 
     with open(args.input) as tweet_jsons:
