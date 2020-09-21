@@ -15,9 +15,12 @@ def is_geotagged(tweet_json: str, bounding_box_is_fine: bool=True) -> bool:
     """
     tweet_dict = json.loads(tweet_json)
     if bounding_box_is_fine:
-        is_geotagged_result = tweet_dict['bounding_box'] is not None or tweet_dict['coordinates'] is not None
+        is_geotagged_result = (
+                                tweet_dict.has_key('bounding_box') and tweet_dict['bounding_box'] is not None 
+                                or tweet_dict.has_key('coordinates') and tweet_dict['coordinates'] is not None
+                              )
     else:
-        is_geotagged_result = tweet_dict['coordinates'] is not None
+        is_geotagged_result = tweet_dict.has_key('coordinates') and tweet_dict['coordinates'] is not None
     return is_geotagged_result
 
 
