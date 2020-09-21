@@ -28,7 +28,7 @@ if __name__ == "__main__":
     parser.add_argument('input', metavar='I',
         help="The JSONL tweets file whence to extract geotagged tweets")
     parser.add_argument('-s', '--strict', action='store_true',
-        help="Whether to only allow tweets that have a non-null coordinates field (by default tweets with a bounding_box field are also allowed through)"
+        help="Whether to only allow tweets that have a non-null coordinates field (by default tweets with a bounding_box field are also allowed through")
     args = parser.parse_args()
 
     with open(args.input) as tweet_jsons:
