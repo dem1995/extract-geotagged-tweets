@@ -16,4 +16,4 @@ optional arguments:
 ```
 
 ## Program usage
-python geotag_filter.py input.jsonl > output.jsonl
+`python geotag_filter.py input.jsonl > output.jsonl`
