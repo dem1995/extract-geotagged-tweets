@@ -38,7 +38,7 @@ if __name__ == "__main__":
         #Extract only the tweets that have a coordinate location associated to them
         for tweet_json in tweet_jsons:
             try:
-                if is_geotagged(tweet_json, !args.strict):
+                if is_geotagged(tweet_json, not args.strict):
                     print(tweet_json, end="") #Newlines already conclude tweet strings themselves
             except ValueError:
                 pass
