@@ -6,7 +6,7 @@ import json
 
 def is_geotagged(tweet_json: str, place_is_fine: bool=True) -> bool:
     """
-    Takes in a tweets JSON string and outputs whether the underlying tweet is geotagged.
+    Takes in a tweet's JSON string and outputs whether the underlying tweet is geotagged.
     Arguments:
         tweet-json: str - the json string whose tweet is to be tested
     Returns:
@@ -34,7 +34,7 @@ if __name__ == "__main__":
         help="Whether to only allow tweets that have a non-null coordinates field (by default tweets with a place field are also allowed through")
     args = parser.parse_args()
 
-    with open(args.input) as tweet_jsons:
+    with open(args.input, encoding="utf-8") as tweet_jsons:
         #Extract only the tweets that have a coordinate location associated to them
         for tweet_json in tweet_jsons:
             try:
